@@ -3,7 +3,7 @@
 
     1- Open je command prompt
     2- Ga naar de folder, type in je command prompt: cd (met een spatie erna) en sleep dan de folder in je command prompt en druk enter.
-    3- Run 'npm install' en wacht tot het klaar is met het downloaden van de packages
+    3- Run 'npm install' (als je dit nog niet gedaan hebt) en wacht tot het klaar is met het downloaden van de packages
     4- Run 'gulp watch' om te kijken naar de veranderingen (dit opent automatisch een nieuw tabblad in je browser)
        Run 'gulp production' om de huidige bestanden in de src folder te comprimeren en exporteren naar de production folder.
     5- Ga in de src folder naar een .js, .html en/of .scss bestand.
