@@ -1,0 +1,9 @@
+@import './text.scss';
+
+$test: #ffffff;
+
+// weg ermee
+
+p {
+    color: $test; background-color: rgb(0, 0, 0);
+}
