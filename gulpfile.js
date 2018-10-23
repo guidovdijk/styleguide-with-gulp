@@ -61,7 +61,7 @@ gulp.task('JsLint', function () {
     // bij deze functie is het "paths.development.scripts" dat gelijk staat aan "src/assets/scripts/**\/*.js" in onze paths object.
     return gulp.src([paths.development.scripts])
     //  Met: .pipe() is het mogelijk om in een gulp.task meerdere taken aan elkaar te binden.
-    //  In de eerste .pipe() roepen we een functie aan en in de tweede vragen we een 'argument' (?) ervan op genaamd 'format'
+    //  In de eerste .pipe() roepen we een functie aan en in de tweede vragen we een 'method' ervan op genaamd 'format'
     .pipe(eslint())
     .pipe(eslint.format())
 });
@@ -80,8 +80,8 @@ gulp.task('SassLint', function () {
 gulp.task('browserSync', function() {
     // Initialiseer ik de browserSync
     browserSync.init({
-        // Hte pad naar de developement folder word meegegeven aan de browserSync.
-        // Omdat de browserSync moet weten naar welk bestand of folder het moet kijken.
+        // Het pad naar de developement folder word meegegeven aan de browserSync
+        // omdat de browserSync moet weten naar welk bestand of folder het moet kijken.
         server: {
             baseDir: paths.development.folder
         },
@@ -91,7 +91,7 @@ gulp.task('browserSync', function() {
 // Als je 'gulp watch' runt in je command prompt krijg je vier linkjes te zien.
 // De twee bovenste: Local en External zijn voor je site zelf en de andere twee voor het dashboard.
 // Kopieer de External url, ga naar de link toe op een andere computer en als je de 'gulp watch' nog hebt draaien zou je de website zien.
-// Dit maakt testen ook een stuk handiger, nu kan je gewoon testen op je mobiel zonder dat je de website online hoeft te zetten.
+// Dit maakt testen ook een stuk handiger. Nu kan je gewoon testen op je mobiel zonder dat je de website online hoeft te zetten.
 
 // Hier word de browserSync taak aangeroepen, samen met de andere taken waar de browserSync naar moet kijken.
 // Het kijken naar de veranderingen van de bestanden wordt gedaan met de .watch(pad naar bestand, task die uitgevoerd moet worden), 
@@ -110,7 +110,7 @@ gulp.task('watch', ['browserSync', 'sass', 'JsLint'], function (){
 // geef ik hier de SassLint functie mee om alles wat met elkaar te maken heeft bijelkaar te houden
 gulp.task('sass', ['SassLint'], function() {
     return gulp.src(paths.development.styles)
-        // Hier owrd de functie uitgevoerd en worden alle code die niet voldoet aan de styleguide gelogged in de command prompt.
+        // Hier word de functie uitgevoerd en worden alle code die niet voldoet aan de styleguide gelogged in de command prompt.
         .pipe(sass({
             errLogToConsole: true
         }))
@@ -119,7 +119,7 @@ gulp.task('sass', ['SassLint'], function() {
         .pipe(gulp.dest(paths.development.folder))
         // Nadat alles is uitgevoerd word de browserSync.reload method aangeroepen om de pagina te herlaaden.
         .pipe(browserSync.reload({
-            // De stream geeft de data terug van welke bestand(en) er is/zijn aangepst.
+            // De stream geeft de data terug van welke bestand(en) er is/zijn aangepast.
             stream: true
         }));
 });
@@ -130,15 +130,15 @@ gulp.task('sass', ['SassLint'], function() {
     Hiervoor heb ik een gulp task gemaakt om alles te verkleinen met maar één command in je command prompt.
 */
 
-// Als je in de index.html kijkt zie je bij de script tags twee comment erom heen.
+// Als je in de index.html kijkt zie je om de script tags twee comments.
 // Deze comments zijn deel van de useref().
 gulp.task('jsAndHtmlMinify', function(){
     return gulp.src(paths.development.html)
-        // De useref() maakt het mogelijk om alle script tags samen te voegen in één bestand, zodat alles snel laadt.
+        // De useref() maakt het mogelijk om alle script tags tussen de comments in de html samen te voegen in één bestand, zodat alles snel laadt.
         // Dit werkt ook met css bestanden.
         .pipe(useref())
-        // Als alle bestanden samen gevoegd word door gulpIf() gekeken of het een javascript bestand is 
-        // en als dat zo is word bestand verkleind met uglify().
+        // Voordat alle bestanden gecomprimeerd worden door uglify(), kijkt gulpIf() eerst of het bestand een javascript bestand is 
+        // en als het een javascript bestand is word bestand verkleind met uglify().
         .pipe(gulpIf('*.js', uglify()))
         // Omdat useref() ook automatisch de html bestanden exporteerd, word er in deze task ook gelijk de html verkleind
         // d.m.v. htmlmin. Deze functie krijgt twee objecten mee: collapseWhitespace dat alle witruimte weghaald en removeComments om alle comments weg te halen.
@@ -150,8 +150,8 @@ gulp.task('jsAndHtmlMinify', function(){
         .pipe(gulp.dest(paths.production.folder))
     });
     
-    gulp.task('sassMinify', function(){
-        return gulp.src(paths.development.styles)
+gulp.task('sassMinify', function(){
+    return gulp.src(paths.development.styles)
         // sass() om de scss bestanden om te zetten in css
         .pipe(sass())
         // cleanCSS om het css bestand te verkleinen
@@ -161,21 +161,21 @@ gulp.task('jsAndHtmlMinify', function(){
 });
 
 /*
-    Meestal als je bestanden verkleind pas je de kwaliteit en/of hoogte, breedte aan, maar er is nog een manier om het te verkleinen.
+    Meestal als je afbeeldingen verkleind pas je de kwaliteit en/of hoogte, breedte aan, maar er is nog een manier om het te verkleinen.
     Elke afbeelding: png, jpg, gif, etc heeft 'meta data'. Meta data is data van: 
     wanneer de afbeelding is aangemaakt, 
     wanneer de afbeelding is bewerkt.
     En soms zit er een klein stuk tekst in over de afbeelding zelf.
 
-    Dit allemaal word meegerekend in de totale grootte van het bestand.
-    Het is mogelijk om dit weg te halen en het fijnste zou zijn als je alle afbeeldingen met één command kan verkleinen.
+    Dit word allemaal meegerekend in de totale grootte van het bestand.
+    Het is mogelijk om dit weg te halen en het makkelijkste zou zijn als je alle afbeeldingen met één command kan verkleinen.
 */
 
 // De task imagesMinify haald alle meta data van de afbeeldingen weg.
 gulp.task('imagesMinify', function(){
     return gulp.src(paths.development.images)
         // Cache() om de afbeeldingen in de production folder op te slaan, omdat afbeeldingen comprimeren best veel tijd inbeslag neemt,
-        // En de gebruiker niet de hele tijd wilt wachten op het comprimeren als de afbeeldingen.
+        // En de gebruiker niet wilt wachten op het comprimeren van afbeeldingen die al in de map staan.
 
         // imagemin() om de meta data van de afbeeldingen af te halen.
         .pipe(cache(imagemin()))
