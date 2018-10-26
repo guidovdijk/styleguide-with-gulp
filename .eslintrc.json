@@ -3,30 +3,48 @@
         "browser": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": 2016,
         "sourceType": "module"
     },
     "rules": {
         "indent": [
-            "warn",
+            2,
             4
         ],
+        "array-element-newline": [
+            2,
+            { "minItems": 4 }
+        ],
+        "array-bracket-newline": [
+            2,
+            { "minItems": 4 }
+        ],
         "linebreak-style": [
-            "error",
+            2,
             "windows"
         ],
         "quotes": [
-            "warn",
+            2,
             "single"
         ],
         "semi": [
-            "error",
+            "warn",
             "always"
         ],
+        "no-multi-spaces": [
+            2,
+            {
+                "ignoreEOLComments": true,
+                "exceptions": { 
+                    "Property": true,
+                    "VariableDeclarator": true,
+                    "ImportDeclaration": true
+                }
+            }
+        ],
         "camelcase": [
-            1, 
+            2, 
             {
                 "properties": "always"
             }

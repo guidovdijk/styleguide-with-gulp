@@ -1,9 +1,16 @@
 @import './text.scss';
-
 $test: #ffffff;
 
-// weg ermee
+p,
+h3 {
+    color: $test;
+    background-color: rgb(182, 133, 182) !important;
+    margin: 0 0 10px;
+    padding: 0;
+    box-shadow: 10px 10px 5px 0 rgba(0, 0, 0, .15);
 
-p {
-    color: $test; background-color: rgb(0, 0, 0);
+    span {
+        color: rgb(151, 47, 47);
+        border: 5px solid rgb(231, 152, 152);
+    }
 }

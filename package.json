@@ -12,6 +12,8 @@
     "del": "^3.0.0",
     "eslint": "^5.7.0",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-babel-minify": "^0.5.0",
     "gulp-cache": "^1.0.2",
     "gulp-clean-css": "^3.10.0",
     "gulp-eslint": "^5.0.0",
@@ -20,16 +22,30 @@
     "gulp-imagemin": "^4.1.0",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
-    "gulp-sass-lint": "^1.4.0",
-    "gulp-uglify": "^3.0.1",
+    "gulp-stylelint": "^7.0.0",
+    "gulp-uglify-es": "^1.0.4",
     "gulp-useref": "^3.1.5",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
     "postcss-reporter": "^6.0.0",
     "run-sequence": "^2.2.1",
     "stylelint": "^9.6.0"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/eslint scripts/*.js",
-    "stylelint": "./node_modules/.bin/stylelint styles/*.scss"
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/assets/scripts/**/*.js": "./node_modules/.bin/eslint --fix --max-warnings=0",
+    "src/assets/styles/**/*.scss": "./node_modules/.bin/stylelint --fix --max-warnings=0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guidovdijk/pushing-github-test.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run -s precommit"
+    }
   },
   "author": "Guido",
   "license": "ISC"

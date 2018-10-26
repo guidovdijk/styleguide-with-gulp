@@ -1,9 +1,11 @@
 var a = 'hoi';
+
 console.log(b);
 
-
-function hallo_test(){
-    function test() {
+function ceecs() { 
+    function cvwftsaawc() {
         console.log();
     }
 }
+//fwefwf
+let test = [2, 3, 4];
